@@ -8,4 +8,7 @@ Rails.application.routes.draw do
     sessions: 'users/sessions',
     registrations: 'users/registrations'
   }
+
+  # Route for fetching current user details
+  get '/current_user', to: 'users#show'
 end
