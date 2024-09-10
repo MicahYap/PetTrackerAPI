@@ -1,4 +1,5 @@
 class PetsController < ApplicationController
+  include Rails.application.routes.url_helpers
   before_action :authenticate_user!
 
   def index
@@ -36,7 +37,20 @@ class PetsController < ApplicationController
 
   def show
     @pet = Pet.find(params[:id])
-    render json: @pet
+  
+    # Check if the pet has an attached vax_card
+    vax_card_url = @pet.vax_card.attached? ? url_for(@pet.vax_card) : nil
+  
+    render json: {
+      id: @pet.id,
+      name: @pet.name,
+      pet_type: @pet.pet_type,
+      breed: @pet.breed,
+      birthday: @pet.birthday,
+      gotcha_day: @pet.gotcha_day,
+      gender: @pet.gender,
+      vax_card_url: vax_card_url # Get URL for the attached file
+    }
   end
 
   def destroy
@@ -49,6 +63,24 @@ class PetsController < ApplicationController
       # Handle the case where deletion fails (e.g., due to a validation error)
       render json: { error: 'Failed to delete pet' }, status: :unprocessable_entity
     end
+  end
+
+  def upload
+    pet = Pet.find(params[:id])  # Use :id to find the pet
+
+    # Check if the pet belongs to the current user
+    if pet.user_id == current_user.id
+      if params[:vax_card].present?
+        pet.vax_card.attach(params[:vax_card])
+        render json: { message: 'File uploaded successfully' }, status: :ok
+      else
+        render json: { error: 'No file uploaded' }, status: :unprocessable_entity
+      end
+    else
+      render json: { error: 'Unauthorized' }, status: :forbidden
+    end
+  rescue ActiveRecord::RecordNotFound
+    render json: { error: 'Pet not found' }, status: :not_found
   end
   
 

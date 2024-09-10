@@ -11,5 +11,9 @@ Rails.application.routes.draw do
 
   # Route for fetching current user details
   get '/current_user', to: 'users#show'
-  resources :pets
+
+  resources :pets do
+    post 'upload', on: :member
+  end
+
 end
