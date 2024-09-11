@@ -67,12 +67,17 @@ class PetsController < ApplicationController
 
   def upload
     pet = Pet.find(params[:id])  # Use :id to find the pet
-
+    
     # Check if the pet belongs to the current user
     if pet.user_id == current_user.id
       if params[:vax_card].present?
+        # Remove the old attachment asynchronously if it exists
+        pet.vax_card.purge_later if pet.vax_card.attached?
+        
+        # Attach the new file
         pet.vax_card.attach(params[:vax_card])
-        render json: { message: 'File uploaded successfully' }, status: :ok
+  
+        render json: { message: 'File uploaded successfully', vax_card_url: url_for(pet.vax_card) }, status: :ok
       else
         render json: { error: 'No file uploaded' }, status: :unprocessable_entity
       end
@@ -82,6 +87,8 @@ class PetsController < ApplicationController
   rescue ActiveRecord::RecordNotFound
     render json: { error: 'Pet not found' }, status: :not_found
   end
+  
+  
   
 
   private
