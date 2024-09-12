@@ -14,6 +14,9 @@ Rails.application.routes.draw do
 
   resources :pets do
     post 'upload', on: :member
+    resources :vaxs 
   end
+
+  
 
 end
