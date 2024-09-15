@@ -25,6 +25,19 @@ class VaxsController < ApplicationController
     render json: @vax
   end
 
+  def destroy
+    @pet = Pet.find(params[:pet_id])
+    @vax = @pet.vaxs.find(params[:id])
+
+    if @vax.destroy
+      render json: { message: 'Vax record successfully deleted.' }, status: :ok
+    else
+      render json: { error: 'Failed to delete Vax record.' }, status: :unprocessable_entity
+    end
+
+
+  end
+
   private
 
   def vax_params

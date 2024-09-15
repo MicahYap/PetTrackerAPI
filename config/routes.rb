@@ -14,7 +14,11 @@ Rails.application.routes.draw do
 
   resources :pets do
     post 'upload', on: :member
-    resources :vaxs 
+    post 'profile_picture', on: :member
+    resources :vaxs, only: [:index, :create, :destroy] # Ensures 'destroy' is included
+    member do
+      patch 'edit_profile', action: :update, as: 'edit_profile' # Custom route for update
+    end
   end
 
   

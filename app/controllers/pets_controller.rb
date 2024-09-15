@@ -40,7 +40,7 @@ class PetsController < ApplicationController
   
     # Check if the pet has an attached vax_card
     vax_card_url = @pet.vax_card.attached? ? url_for(@pet.vax_card) : nil
-  
+    profile_picture_url = @pet.profile_picture.attached? ? url_for(@pet.profile_picture) : nil
     render json: {
       id: @pet.id,
       name: @pet.name,
@@ -49,7 +49,8 @@ class PetsController < ApplicationController
       birthday: @pet.birthday,
       gotcha_day: @pet.gotcha_day,
       gender: @pet.gender,
-      vax_card_url: vax_card_url # Get URL for the attached file
+      vax_card_url: vax_card_url,
+      profile_picture_url: profile_picture_url
     }
   end
 
@@ -85,6 +86,27 @@ class PetsController < ApplicationController
       render json: { error: 'Unauthorized' }, status: :forbidden
     end
   rescue ActiveRecord::RecordNotFound
+    render json: { error: 'Pet not found' }, status: :not_found
+  end
+
+  def profile_picture
+    pet = Pet.find(params[:id])
+    if pet.user_id == current_user.id
+      if params[:profile_picture].present?
+        # Remove the old attachment asynchronously if it exists
+        # pet.profile_picture.purge_later if pet.profile_picture.attached?
+        
+        # Attach the new file
+        pet.profile_picture.attach(params[:profile_picture])
+  
+        render json: { message: 'File uploaded successfully', profile_picture_url: url_for(pet.profile_picture) }, status: :ok
+      else
+        render json: { error: 'No file uploaded' }, status: :unprocessable_entity
+      end
+    else
+      render json: { error: 'Unauthorized' }, status: :forbidden
+    end
+    rescue ActiveRecord::RecordNotFound
     render json: { error: 'Pet not found' }, status: :not_found
   end
   
