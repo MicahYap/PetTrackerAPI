@@ -11,5 +11,16 @@ Rails.application.routes.draw do
 
   # Route for fetching current user details
   get '/current_user', to: 'users#show'
-  resources :pets
+
+  resources :pets do
+    post 'upload', on: :member
+    post 'profile_picture', on: :member
+    resources :vaxs, only: [:index, :create, :destroy] # Ensures 'destroy' is included
+    member do
+      patch 'edit_profile', action: :update, as: 'edit_profile' # Custom route for update
+    end
+  end
+
+  
+
 end

@@ -1,0 +1,15 @@
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  calendar: 2024-09-11
+  vet: MyString
+  vaccine: MyString
+  next_visit: 2024-09-11
+  pet: one
+
+two:
+  calendar: 2024-09-11
+  vet: MyString
+  vaccine: MyString
+  next_visit: 2024-09-11
+  pet: two
