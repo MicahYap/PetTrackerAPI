@@ -7,6 +7,8 @@ class PetsController < ApplicationController
     render json: @pets
   end
 
+  
+
   def new
     @pet = Pet.new
     render json: @pet
