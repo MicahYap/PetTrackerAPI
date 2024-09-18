@@ -31,4 +31,14 @@ RSpec.describe "VaxsControllers", type: :request do
     end
   end
 
+  describe "Delete #destroy" do
+    it 'deletes vax entry' do
+      @pet = create(:pet, user: @user)
+      @vax = create(:vax, pet: @pet)
+      expect{
+        delete "/pets/#{@pet.id}/vaxs/#{@vax.id}"
+      }.to change(Vax, :count).by(-1)
+    end
+  end   
+
 end

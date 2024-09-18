@@ -9,11 +9,8 @@ RSpec.describe GroomersController, type: :request do
 
   describe "GET #index" do
     it 'returns a successful response' do
-      # Create a pet instance with necessary attributes and associate it with the user
-      pet = FactoryBot.create(:pet, user: @user) # Adjust according to your factory setup
-
-      # Make the GET request with the pet_id parameter
-      get :index, params: { pet_id: pet.id }
+      @pet = create(:pet, user: @user) 
+      get "/pets/#{@pet.id}/groomers", params: { pet_id: @pet.id }
 
       # Check if the response status is 200 OK
       expect(response).to have_http_status(:ok)
