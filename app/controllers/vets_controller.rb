@@ -33,6 +33,6 @@ class VetsController < ApplicationController
   private
 
   def vet_params
-    params.require(:vet).permit(:calendar, :vet, :concern, :next_visit)
+    params.permit(:calendar, :vet, :concern, :next_visit)
   end
 end
