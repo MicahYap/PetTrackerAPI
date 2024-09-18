@@ -41,7 +41,7 @@ class VaxsController < ApplicationController
   private
 
   def vax_params
-    params.require(:vax).permit(:calendar, :vet, :vaccine, :next_visit, :pet_id)
+    params.permit(:calendar, :vet, :vaccine, :next_visit, :pet_id)
   end
 
 

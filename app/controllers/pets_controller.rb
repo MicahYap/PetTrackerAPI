@@ -4,8 +4,22 @@ class PetsController < ApplicationController
 
   def index
     @pets = current_user.pets
-    render json: @pets
+
+    render json: @pets.map { |pet| 
+      {
+        id: pet.id,
+        name: pet.name,
+        pet_type: pet.pet_type,
+        breed: pet.breed,
+        birthday: pet.birthday,
+        gotcha_day: pet.gotcha_day,
+        gender: pet.gender,
+        profile_picture_url: pet.profile_picture.attached? ? url_for(pet.profile_picture) : nil
+      }
+    }
   end
+
+  
 
   def new
     @pet = Pet.new
@@ -116,7 +130,7 @@ class PetsController < ApplicationController
   private
 
   def pet_params
-    params.require(:pet).permit(:name, :pet_type, :breed, :birthday, :gotcha_day, :gender, :user_id)
+    params.permit(:name, :pet_type, :breed, :birthday, :gotcha_day, :gender, :user_id)
   end
 
 end
