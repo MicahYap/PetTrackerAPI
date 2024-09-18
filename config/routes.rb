@@ -20,6 +20,7 @@ Rails.application.routes.draw do
       patch 'edit_profile', action: :update, as: 'edit_profile' 
     end
     resources :groomers
+    resources :vets
   end
 
   

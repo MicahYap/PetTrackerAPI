@@ -4,4 +4,5 @@ class Pet < ApplicationRecord
   has_one_attached :profile_picture, dependent: :destroy
   has_many :vaxs, dependent: :destroy
   has_many :groomers, dependent: :destroy
+  has_many :vets, dependent: :destroy
 end
