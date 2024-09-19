@@ -36,18 +36,20 @@ class PetsController < ApplicationController
   end
 
   def edit
-    @pet = Pet.find(params[:id])
+    @pet = current_user.pet.find(params[:id])
     render json: @pet
   end
 
   def update
-    @pet = Pet.find(params[:id])
+    @pet = current_user.pets.find(params[:id])
     if @pet.update(pet_params)
       render json: @pet, status: :ok
     else
       render json: @pet.errors, status: :unprocessable_entity
     end
   end
+  
+  
 
   def show
     @pet = Pet.find(params[:id])
@@ -130,7 +132,7 @@ class PetsController < ApplicationController
   private
 
   def pet_params
-    params.permit(:name, :pet_type, :breed, :birthday, :gotcha_day, :gender, :user_id)
+    params.permit(:name, :pet_type, :breed, :birthday, :gotcha_day, :gender)
   end
 
 end
