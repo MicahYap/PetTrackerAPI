@@ -41,6 +41,6 @@ end
 
 private
 def groomer_params
-  params.require(:groomer).permit(:calendar, :groomer, :next_visit, :pet_id)
+  params.permit(:calendar, :groomer, :next_visit, :pet_id)
 end
 
