@@ -1,4 +1,4 @@
-<h1>Welcome to the Pet Tracker App!</h1> 
+<h1>Welcome to the Pet Tracker API!</h1> 
 <p>This application is built using Ruby on Rails (back end) application designed to help users track and manage their pets' grooming, vet visits, and vaccinations.</p>
 <p><strong>Note:</strong> Please run this application along with the Pet Tracker from my repository for the front end.</p>
 
