@@ -1,24 +1,34 @@
-# README
+<h1>Welcome to the Pet Tracker App!</h1> 
+<p>This application is built using Ruby on Rails (back end) application designed to help users track and manage their pets' grooming, vet visits, and vaccinations.</p>
+<p><strong>Note:</strong> Please run this application along with the Pet Tracker from my repository for the front end.</p>
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+<p>Features:</p>
+<ul>
+  <li>User authentication with Devise</li>
+  <li>Create pet profile and upload profile picture</li>
+  <li>Track grooming, vet visits, and vaccinations</li>
+  <li>Upload vaccination card</li>
+  <li>Shopping List - Coming Soon!</li>
+</ul>
 
-Things you may want to cover:
+<p>This project is built with the following :</p>
+<ul>
+  <li>React JS for front end</li>
+  <li>Ruby on Rails for backend</li>
+  <li>Tailwind CSS for styling</li>
+</ul>
 
-* Ruby version
+<p>Clone the repository:</p>
+<ul> Front end:
+  <li>git clone https://github.com/MicahYap/PetTracker.git</li>
+  <li>go to the folder</li>
+  <li>npm install</li>
+  <li>npm run dev</li>
+</ul>
 
-* System dependencies
+<ul>Backend:
+  <li>git clone https://github.com/MicahYap/PetTrackerAPI.git</li>
+  <li>go to the folder</li>
+  <li>rails s</li>
+</ul>
 
-* Configuration
-
-* Database creation
-
-* Database initialization
-
-* How to run the test suite
-
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
