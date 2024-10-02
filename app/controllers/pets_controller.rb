@@ -54,7 +54,6 @@ class PetsController < ApplicationController
   def show
     @pet = Pet.find(params[:id])
   
-    # Check if the pet has an attached vax_card
     vax_card_url = @pet.vax_card.attached? ? url_for(@pet.vax_card) : nil
     profile_picture_url = @pet.profile_picture.attached? ? url_for(@pet.profile_picture) : nil
     render json: {
