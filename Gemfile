@@ -28,6 +28,8 @@ gem "bootsnap", require: false
 
 # Use Rack CORS for handling Cross-Origin Resource Sharing (CORS), making cross-origin Ajax possible
 gem "rack-cors"
+gem 'devise'
+gem 'devise-jwt'
 
 group :development, :test do
   # See https://guides.rubyonrails.org/debugging_rails_applications.html#debugging-with-the-debug-gem
@@ -38,9 +40,6 @@ group :development, :test do
 
   # Omakase Ruby styling [https://github.com/rails/rubocop-rails-omakase/]
   gem "rubocop-rails-omakase", require: false
-
-  gem 'devise'
-  gem 'devise-jwt'
   gem 'jsonapi-serializer'
   gem 'rspec-rails', '~> 6.0.0'
   gem 'factory_bot_rails'
@@ -51,3 +50,7 @@ group :development, :test do
 end
 
 
+
+gem "dockerfile-rails", ">= 1.6", :group => :development
+
+gem "aws-sdk-s3", "~> 1.166", :require => false
